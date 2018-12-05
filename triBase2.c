@@ -4,6 +4,7 @@
 #include <math.h>
 
 clock_t t1,t2;
+int n1 = 50000,n2 = 100000,n3 = 150000,n4 = 200000,n5 = 250000;
 void afficherRes(int arr[], int n) 
 { 
 	for (int i = 0; i < n; i++) 
@@ -22,6 +23,15 @@ int* remplir(int* tab,int n){
 	return tab;
 }
 
+int getSizeByIndicator(int i){
+	switch(i){
+		case 1 : return n1;
+		case 2 : return n2;
+		case 3 : return n3;
+		case 4 : return n4;
+		case 5 : return n5;
+	}
+}
 /***************** TRI BASE *****************/
 int max(int arr[], int n) 
 { 
@@ -203,12 +213,7 @@ int printMenuAndGetUserChoice(){
 }
 int main() 
 { 
-	/*int arr[] = {170, 45, 75, 90, 802, 24, 2, 66}; 
-	int n = sizeof(arr)/sizeof(arr[0]); 
-	triBase(arr, n); 
-	afficherRes(arr, n); */
-	
-	int n1 = 50000,n2 = 100000,n3 = 150000,n4 = 200000,n5 = 250000;
+
 	int* tab1 = malloc(n1 * sizeof(int));
 	int* tab2 = malloc(n2 * sizeof(int));
 	int* tab3 = malloc(n3 * sizeof(int));
@@ -217,232 +222,236 @@ int main()
 
 
 
-	int userChoice = printMenuAndGetUserChoice();
-				int k;
+	int k;
+	while(1){
+		int userChoice = printMenuAndGetUserChoice();
+		switch(userChoice) {
+			case 0 : exit(0); break;
+			case 1 :
+					printf("\n\n***************** TRI BULLE *****************\n");
+					for(k=1;k<6;k++){
+						printf("---- %i ----\n",k);
+						
+						switch(k){
+						    case 1 : tab1 = remplir(tab1,n1);
+							     t1 = clock();
+							     TriBulle(tab1,n1);	
+							     break;
+						    case 2 : tab2 = remplir(tab2,n2);
+							     t1 = clock();
+							     TriBulle(tab2,n2);
+							     break;
+						    case 3 : tab3 = remplir(tab3,n3);
+				                             t1 = clock();
+							     TriBulle(tab3,n3);
+							     break;
+						    case 4 : tab4 = remplir(tab4,n4);
+							     t1 = clock();
+							     TriBulle(tab4,n4);
+							     break;
+						    case 5 : tab5 = remplir(tab5,n5);
+							     t1 = clock();
+							     TriBulle(tab5,n5);
+							     break;
+						   }
 
-	switch(userChoice) {
-		case 0 : exit(0); break;
-		case 1 :
-				printf("\n\n***************** TRI BULLE *****************\n");
-				for(k=1;k<=6;k++){
-					printf("---- %i ----\n",k);
-					
-					switch(k){
-					    case 1 : tab1 = remplir(tab1,n1);
-						     t1 = clock();
-						     TriBulle(tab1,n1);	
-						     break;
-					    case 2 : tab2 = remplir(tab2,n2);
-						     t1 = clock();
-						     TriBulle(tab2,n2);
-						     break;
-					    case 3 : tab3 = remplir(tab3,n3);
-			                             t1 = clock();
-						     TriBulle(tab3,n3);
-						     break;
-					    case 4 : tab4 = remplir(tab4,n4);
-						     t1 = clock();
-						     TriBulle(tab4,n4);
-						     break;
-					    case 5 : tab5 = remplir(tab5,n5);
-						     t1 = clock();
-						     TriBulle(tab5,n5);
-						     break;
-					   }
-
-					t2 = clock();
-					printf("tab[%d] = %f\n",k,((double)(t2-t1)/CLOCKS_PER_SEC ));
-				}
-				/************************* END TRI BULLE ***************/
-			break;
-
-		case 2 : 
-
-			printf("\n\n***************** TRI BULLE OPT *****************\n");
-			for(k=1;k<=6;k++){
-				printf("---- %i ----\n",k);
-				
-				switch(k){
-				    case 1 : tab1 = remplir(tab1,n1);
-					     t1 = clock();
-					     TriBulleOpt(tab1,n1);	
-					     break;
-				    case 2 : tab2 = remplir(tab2,n2);
-					     t1 = clock();
-					     TriBulleOpt(tab2,n2);
-					     break;
-				    case 3 : tab3 = remplir(tab3,n3);
-		                             t1 = clock();
-					     TriBulleOpt(tab3,n3);
-					     break;
-				    case 4 : tab4 = remplir(tab4,n4);
-					     t1 = clock();
-					     TriBulleOpt(tab4,n4);
-					     break;
-				    case 5 : tab5 = remplir(tab5,n5);
-					     t1 = clock();
-					     TriBulleOpt(tab5,n5);
-					     break;
-				   }
-
-				t2 = clock();
-				printf("tab[%d] = %f\n",k,((double)(t2-t1)/CLOCKS_PER_SEC ));
-			}
-
-			/************************* END TRI BULLE OPT ***************/
+						t2 = clock();
+						printf("tab[%d] = %f,\n",getSizeByIndicator(k),((double)(t2-t1)/CLOCKS_PER_SEC ));
+					}
+					/************************* END TRI BULLE ***************/
 				break;
 
-		case 3 : 
+			case 2 : 
 
-				printf("\n\n***************** TRI GNOME *****************\n");
-			for(k=1;k<=6;k++){
-				printf("---- %i ----\n",k);
-				
-				switch(k){
-				    case 1 : tab1 = remplir(tab1,n1);
-					     t1 = clock();
-					     triGnome(tab1,n1);	
-					     break;
-				    case 2 : tab2 = remplir(tab2,n2);
-					     t1 = clock();
-					     triGnome(tab2,n2);
-					     break;
-				    case 3 : tab3 = remplir(tab3,n3);
-		                             t1 = clock();
-					     triGnome(tab3,n3);
-					     break;
-				    case 4 : tab4 = remplir(tab4,n4);
-					     t1 = clock();
-					     triGnome(tab4,n4);
-					     break;
-				    case 5 : tab5 = remplir(tab5,n5);
-					     t1 = clock();
-					     triGnome(tab5,n5);
-					     break;
-				   }
-
-				t2 = clock();
-				printf("tab[%d] = %f\n",k,((double)(t2-t1)/CLOCKS_PER_SEC ));
-			
-			}
-
-			/************************* END TRI BULLE OPT ***************/
-
-			break;
-
-		case 4 : 
-				printf("\n\n***************** TRI BASE *****************\n");
-				for(k=1;k<=6;k++){
+				printf("\n\n***************** TRI BULLE OPT *****************\n");
+				for(k=1;k<6;k++){
 					printf("---- %i ----\n",k);
 					
 					switch(k){
 					    case 1 : tab1 = remplir(tab1,n1);
 						     t1 = clock();
-						     triBase(tab1,n1);	
+						     TriBulleOpt(tab1,n1);	
 						     break;
 					    case 2 : tab2 = remplir(tab2,n2);
 						     t1 = clock();
-						     triBase(tab2,n2);
+						     TriBulleOpt(tab2,n2);
 						     break;
 					    case 3 : tab3 = remplir(tab3,n3);
 			                             t1 = clock();
-						     triBase(tab3,n3);
+						     TriBulleOpt(tab3,n3);
 						     break;
 					    case 4 : tab4 = remplir(tab4,n4);
 						     t1 = clock();
-						     triBase(tab4,n4);
+						     TriBulleOpt(tab4,n4);
 						     break;
 					    case 5 : tab5 = remplir(tab5,n5);
 						     t1 = clock();
-						     triBase(tab5,n5);
+						     TriBulleOpt(tab5,n5);
 						     break;
 					   }
 
 					t2 = clock();
-					printf("tab[%d] = %f\n",k,((double)(t2-t1)/CLOCKS_PER_SEC ));
+					printf("tab[%d] = %f,\n",getSizeByIndicator(k),((double)(t2-t1)/CLOCKS_PER_SEC ));
+				}
 
-		
-	
-	}
-	/************************* END TRI BAS ***************/
-		break;
+				/************************* END TRI BULLE OPT ***************/
+					break;
 
-		case 5 : 
-			printf("\n\n***************** TRI RAPIDE *****************\n");
-			for(k=1;k<=6;k++){
-				printf("---- %i ----\n",k);
+			case 3 : 
+
+					printf("\n\n***************** TRI GNOME *****************\n");
+				for(k=1;k<6;k++){
+					printf("---- %i ----\n",k);
+					
+					switch(k){
+					    case 1 : tab1 = remplir(tab1,n1);
+						     t1 = clock();
+						     triGnome(tab1,n1);	
+						     break;
+					    case 2 : tab2 = remplir(tab2,n2);
+						     t1 = clock();
+						     triGnome(tab2,n2);
+						     break;
+					    case 3 : tab3 = remplir(tab3,n3);
+			                             t1 = clock();
+						     triGnome(tab3,n3);
+						     break;
+					    case 4 : tab4 = remplir(tab4,n4);
+						     t1 = clock();
+						     triGnome(tab4,n4);
+						     break;
+					    case 5 : tab5 = remplir(tab5,n5);
+						     t1 = clock();
+						     triGnome(tab5,n5);
+						     break;
+					   }
+
+					t2 = clock();
+					printf("tab[%d] = %f,\n",getSizeByIndicator(k),((double)(t2-t1)/CLOCKS_PER_SEC ));
 				
-				switch(k){
-				    case 1 : tab1 = remplir(tab1,n1);
-					     t1 = clock();
-					     triRapide(tab1,0,n1);	
-					     break;
-				    case 2 : tab2 = remplir(tab2,n2);
-					     t1 = clock();
-					     triRapide(tab2,0,n2);
-					     break;
-				    case 3 : tab3 = remplir(tab3,n3);
-		                             t1 = clock();
-					     triRapide(tab3,0,n3);
-					     break;
-				    case 4 : tab4 = remplir(tab4,n4);
-					     t1 = clock();
-					     triRapide(tab4,0,n4);
-					     break;
-				    case 5 : tab5 = remplir(tab5,n5);
-					     t1 = clock();
-					     triRapide(tab5,0,n5);
-					     break;
-				   }
+				}
 
-				t2 = clock();
-				printf("tab[%d] = %f\n",k,((double)(t2-t1)/CLOCKS_PER_SEC ));
+				/************************* END TRI BULLE OPT ***************/
 
-		
-	
-	}
-	/************************* END TRI RAPIDE ***************/
+				break;
 
-		break;
+			case 4 : 
+					printf("\n\n***************** TRI BASE *****************\n");
+					for(k=1;k<6;k++){
+						printf("---- %i ----\n",k);
+						
+						switch(k){
+						    case 1 : tab1 = remplir(tab1,n1);
+							     t1 = clock();
+							     triBase(tab1,n1);	
+							     break;
+						    case 2 : tab2 = remplir(tab2,n2);
+							     t1 = clock();
+							     triBase(tab2,n2);
+							     break;
+						    case 3 : tab3 = remplir(tab3,n3);
+				                             t1 = clock();
+							     triBase(tab3,n3);
+							     break;
+						    case 4 : tab4 = remplir(tab4,n4);
+							     t1 = clock();
+							     triBase(tab4,n4);
+							     break;
+						    case 5 : tab5 = remplir(tab5,n5);
+							     t1 = clock();
+							     triBase(tab5,n5);
+							     break;
+						   }
 
-		case 6 : 
+						t2 = clock();
+						printf("tab[%d] = %f,\n",getSizeByIndicator(k),((double)(t2-t1)/CLOCKS_PER_SEC ));
 
-		printf("\n\n***************** TRI PAR TAS *****************\n");
-			for(k=1;k<=6;k++){
-				printf("---- %i ----\n",k);
-				
-				switch(k){
-				    case 1 : tab1 = remplir(tab1,n1);
-					     t1 = clock();
-					     triTas(tab1,n1);	
-					     break;
-				    case 2 : tab2 = remplir(tab2,n2);
-					     t1 = clock();
-					     triTas(tab2,n2);
-					     break;
-				    case 3 : tab3 = remplir(tab3,n3);
-		                             t1 = clock();
-					     triTas(tab3,n3);
-					     break;
-				    case 4 : tab4 = remplir(tab4,n4);
-					     t1 = clock();
-					     triTas(tab4,n4);
-					     break;
-				    case 5 : tab5 = remplir(tab5,n5);
-					     t1 = clock();
-					     triTas(tab5,n5);
-					     break;
-				   }
-
-				t2 = clock();
-				printf("tab[%d] = %f\n",k,((double)(t2-t1)/CLOCKS_PER_SEC ));
-
-				
 			
-			}
-	/************************* END TRI PAR TAS ***************/
+		
+		}
+		/************************* END TRI BAS ***************/
+			break;
 
-	break;
+			case 5 : 
+				printf("\n\n***************** TRI RAPIDE *****************\n");
+				for(k=1;k<6;k++){
+					printf("---- %i ----\n",k);
+					
+					switch(k){
+					    case 1 : tab1 = remplir(tab1,n1);
+						     t1 = clock();
+						     triRapide(tab1,0,n1);	
+						     break;
+					    case 2 : tab2 = remplir(tab2,n2);
+						     t1 = clock();
+						     triRapide(tab2,0,n2);
+						     break;
+					    case 3 : tab3 = remplir(tab3,n3);
+			                             t1 = clock();
+						     triRapide(tab3,0,n3);
+						     break;
+					    case 4 : tab4 = remplir(tab4,n4);
+						     t1 = clock();
+						     triRapide(tab4,0,n4);
+						     break;
+					    case 5 : tab5 = remplir(tab5,n5);
+						     t1 = clock();
+						     triRapide(tab5,0,n5);
+						     break;
+					   }
+
+					t2 = clock();
+					printf("tab[%d] = %f,\n",getSizeByIndicator(k),((double)(t2-t1)/CLOCKS_PER_SEC ));
+
+			
+		
+		}
+		/************************* END TRI RAPIDE ***************/
+
+			break;
+
+			case 6 : 
+
+			printf("\n\n***************** TRI PAR TAS *****************\n");
+				for(k=1;k<6;k++){
+					printf("---- %i ----\n",k);
+					
+					switch(k){
+					    case 1 : tab1 = remplir(tab1,n1);
+						     t1 = clock();
+						     triTas(tab1,n1);	
+						     break;
+					    case 2 : tab2 = remplir(tab2,n2);
+						     t1 = clock();
+						     triTas(tab2,n2);
+						     break;
+					    case 3 : tab3 = remplir(tab3,n3);
+			                             t1 = clock();
+						     triTas(tab3,n3);
+						     break;
+					    case 4 : tab4 = remplir(tab4,n4);
+						     t1 = clock();
+						     triTas(tab4,n4);
+						     break;
+					    case 5 : tab5 = remplir(tab5,n5);
+						     t1 = clock();
+						     triTas(tab5,n5);
+						     break;
+					   }
+
+					t2 = clock();
+					printf("tab[%d] = %f,\n",getSizeByIndicator(k),((double)(t2-t1)/CLOCKS_PER_SEC ));
+
+					
+				
+				}
+		/************************* END TRI PAR TAS ***************/
+
+		break;
+		}// end main switch
+		printf("Press ENTER key to Continue\n");  
+		getchar();
+		int c = getchar();
 	}
 
 	printf("\n");
